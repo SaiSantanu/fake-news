@@ -15,6 +15,10 @@
       "dest": "/api/predict.py"
     },
     {
+      "src": "/style.css",
+      "dest": "/public/style.css"
+    },
+    {
       "src": "/(.*)",
       "dest": "/public/index.html"
     }
