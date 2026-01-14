@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fake News Detection</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Fake News Detection</h1>
+        <textarea id="news" placeholder="Paste news article here..."></textarea>
+        <button onclick="checkNews()">Check News</button>
+        <p id="result"></p>
+    </div>
+
+<script>
+async function checkNews() {
+    const text = document.getElementById("news").value;
+
+    if (!text.trim()) {
+        document.getElementById("result").innerText = "Please enter some text.";
+        return;
+    }
+
+    const response = await fetch("/api/predict", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text })
+    });
+
+    const data = await response.json();
+    document.getElementById("result").innerText =
+        "Prediction: " + data.prediction;
+}
+</script>
+</body>
+</html>
